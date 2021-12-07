@@ -1,24 +1,25 @@
 ﻿script "utils"
-
-
 local sRootFolder
 
 on libraryStack
    set the itemdel to slash
-   put item 1 to -3 of the fileName of this stack into sRootFolder
+   if the short name of the target is "utils" then
+      put item 1 to -3 of the fileName of this stack into sRootFolder
+   end if
 end libraryStack
 
 ------------------------------------------------------
 -- stack / card handlers
 ------------------------------------------------------
+
 function mainCard
    return the long id of card id 1002 of stack "mentatchess"
 end mainCard
 
-function stackRef pLoc, pName, pSuffix
-   return pathJoin(root(), pLoc, pName & "." & "livecodescript")
-end stackRef
-
+function mainStackRef
+   put pathJoin(scriptFolder(), "main.livecodescript")
+   return pathJoin(scriptFolder(), "main.livecodescript")
+end mainStackRef
 
 
 ------------------------------------------------------
@@ -36,6 +37,10 @@ end iconFolder
 function scriptFolder
    return pathJoin(root(), "scripts")
 end scriptFolder
+
+function behaviourFolder
+   return pathJoin(scriptFolder(), "behaviours")
+end behaviourFolder
 
 --
 -- Return true is pPath is absolute
